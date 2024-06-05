@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "2e73ff9d-dc4b-4234-bf9c-2b63c5b56404",
+		"name": "Django API Example",
+		"description": "Postman collection for Django APIs with nested routes and custom views",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34921142"
+	},
+	"item": [
+		{
+			"name": "Get All Locations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response JSON\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Extract the first location ID from the response\r",
+							"var locationId = jsonData[0].id;\r",
+							"\r",
+							"// Store the locationId in a Postman environment variable\r",
+							"pm.environment.set(\"location_id\", locationId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/location/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"location",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Departments for Location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response JSON\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Extract the first location ID from the response\r",
+							"var departmentId = jsonData[0].id;\r",
+							"\r",
+							"// Store the locationId in a Postman environment variable\r",
+							"pm.environment.set(\"department_id\", departmentId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/location/{{location_id}}/department",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"location",
+						"{{location_id}}",
+						"department"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Categories for Department",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response JSON\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Extract the first category ID from the response\r",
+							"var categoryId = jsonData[0].id;\r",
+							"\r",
+							"// Store the categoryId in a Postman environment variable\r",
+							"pm.environment.set(\"category_id\", categoryId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/location/{{location_id}}/department/{{department_id}}/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"location",
+						"{{location_id}}",
+						"department",
+						"{{department_id}}",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Subcategories for Category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response JSON\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Extract the first sub category ID from the response\r",
+							"var subcategoryId = jsonData[0].id;\r",
+							"\r",
+							"// Store the subcategoryId in a Postman environment variable\r",
+							"pm.environment.set(\"subcategory_id\", subcategoryId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/location/{{location_id}}/department/{{department_id}}/category/{{category_id}}/subcategory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"location",
+						"{{location_id}}",
+						"department",
+						"{{department_id}}",
+						"category",
+						"{{category_id}}",
+						"subcategory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get SUB-Subcategories for Category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/location/{{location_id}}/department/{{department_id}}/category/{{category_id}}/subcategory/{{subcategory_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"location",
+						"{{location_id}}",
+						"department",
+						"{{department_id}}",
+						"category",
+						"{{category_id}}",
+						"subcategory",
+						"{{subcategory_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get SKUs by Metadata",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/skus_by_metadata?location=Perimeter&department=Bakery&category=Bakery Bread&subcategory=Bagels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"skus_by_metadata"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "Perimeter"
+						},
+						{
+							"key": "department",
+							"value": "Bakery"
+						},
+						{
+							"key": "category",
+							"value": "Bakery Bread"
+						},
+						{
+							"key": "subcategory",
+							"value": "Bagels"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
